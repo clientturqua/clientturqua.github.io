@@ -1,0 +1,12 @@
+@import url('./../node_modules/todomvc-common/base.css');
+@import url('./../node_modules/todomvc-app-css/index.css');
+.is-selected {
+    text-decoration: underline;
+}
+
+.footer:before{
+  height: 0px;
+}
+body{
+    background-image: url("assets/images/ddd.jpg");
+}

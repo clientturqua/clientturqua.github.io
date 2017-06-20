@@ -1,0 +1,28 @@
+.canceled{
+    color:crimson;
+    display:none;
+}
+
+.canceled2{
+    text-decoration:line-through;
+    color:crimson;
+}
+
+.completedv2{
+    color: green;
+   text-decoration:underline;
+}
+textarea { 
+    resize: horizontal;   
+}
+
+.rajabox{
+    color: orange;
+    border: 10px solid;
+    width: '300px';
+    text-align: 'center';
+    font-size: '45px';
+    line-height: '75px';
+    box-sizing: border-box;
+    overflow: hidden;
+}

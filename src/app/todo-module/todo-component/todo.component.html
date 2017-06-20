@@ -1,0 +1,126 @@
+<!--<img class="img-responsive" width="10%"src="assets/images/News.png">-->
+<table width="20%" valign="center">
+<button (click)="toggleShow1()"><img class="img-responsive"  width="100%"src="assets/images/ani.gif"></button>
+</table>
+<div class="toggle-panel" *ngIf="show1" [hidden]="hidden1" [style.visibility]="visibility1">
+<form>
+    <input class="btn btn-info" onclick="window.location.href='http://edition.cnn.com/sport'" type="button" value="Sports"/>
+    <input class="btn btn-info" onclick="window.location.href='http://edition.cnn.com/politics'" type="button" value="Politics"/>    
+    <input class="btn btn-info" onclick="window.location.href='http://edition.cnn.com/'" type="button" value="Daily"/>
+    <input class="btn btn-info" onclick="window.location.href='http://edition.cnn.com/specials/politics/state-cnn-politics-magazine'" type="button" value="Magazine"/>
+    
+</form>
+</div>
+<section style="background-color:white" class="todoapp">
+  <header class="header">
+    <h1 class="text-primary" [ngStyle]="{'left': '0px', 'top': '-100px', 'color': 'blue', 'font-size': '48px', 'font-weight': 'bold'}">Todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title">
+    <!--<input type="datetime-local" [(ngModel)]="newTodo.dueDate">-->
+    <table>
+      <td width="33%" valign="top">
+        <timepicker [(ngModel)]="newTodo.dueTime" style=color:green></timepicker>
+      </td>
+      <td width="33%" valign="center">
+        <ng2-datepicker placeholder="YYYY-MM-DD" [(ngModel)]="newTodo.dueDate"></ng2-datepicker>
+        <label style=color:yellowgreen>Set Date/Time</label>
+      </td>
+      <td width="33%" valign="center">
+        <button type="button" text-align=center class="btn btn-primary" [(ngModel)]="singleModel" (click)="addTodo()" style=color:gainsboro>Add Task</button>
+      </td>
+    </table>
+  </header>
+  <section class="main" *ngIf="todos.length > 0 && selection == 'ALL'">
+    <ul class="todo-list">
+      <li *ngFor="let todo of (todos | openTodoPipes)" [class.completedv2]="todo.complete" [class.canceled]="todo.cancel">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete" />
+          <label><small style=color:blue>Task Name: </small>{{todo.title}} <small style=color:gray style=font-size:60%>start date: {{todo.today|toReadableToday}}</small><small style=color:gray style=font-size:50%>(due date: {{todo.dueDate|toReadableDate}} / {{todo.dueTime|toReadableTime}})</small></label>
+          <button class="destroy" (click)="removeTodo(todo)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section class="main" *ngIf="openTodos.length > 0  && selection == 'OPEN'">
+    <ul class="todo-list">
+      <li *ngFor="let todo of openTodos" [class.completedv2]="todo.complete">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+          <label><small style=color:blue>Task Name: </small>{{todo.title}} <small style=color:gray style=font-size:60%>start date: {{todo.today|toReadableToday}}</small><small style=color:gray style=font-size:50%>(due date: {{todo.dueDate|toReadableDate}} / {{todo.dueTime|toReadableTime}})</small></label>
+          <button class="destroy" (click)="removeTodo(todo)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section class="main" *ngIf="completedTodos.length > 0  && selection == 'COMPLETED'">
+    <ul class="todo-list">
+      <li *ngFor="let todo of completedTodos" [class.completedv2]="todo.complete">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+          <label><small style=color:blue>Task Name: </small>{{todo.title}} <small style=color:gray style=font-size:60%>start date: {{todo.today|toReadableToday}}</small><small style=color:gray style=font-size:50%>(due date: {{todo.dueDate|toReadableDate}} / {{todo.dueTime|toReadableTime}})</small></label>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section class="main" *ngIf="canceledTodos.length > 0  && selection == 'CANCELED'">
+    <ul class="todo-list">
+      <li *ngFor="let todo of canceledTodos" [class.completedv2]="todo.complete" [class.canceled2]="todo.cancel">
+        <div class="view">
+          <label><small style=color:blue>Task Name: </small>{{todo.title}} <small style=color:gray style=font-size:60%>start date: {{todo.today|toReadableToday}}</small><small style=color:gray style=font-size:50%>(due date: {{todo.dueDate|toReadableDate}} / {{todo.dueTime|toReadableTime}})</small></label>
+          <button class="destroy" (click)="removeTodo(todo)"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <!--<section class="main" *ngIf="canceledTodos.length > 0  && selection == 'CANCELED'">
+    <ul class="todo-list">
+      <li  *ngIf="todo.cancel==true" *ngFor="let todo of todos" [class.completed]="todo.complete">
+        <div class="view">
+          <input class="toggle"  type="checkbox"(click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+          <label>{{todo.title}} - 4 {{todo.cancel}}</label>
+          <button class="destroy"  (click)="removeTodo(todo)" ></button>
+        </div>
+      </li>
+    </ul>
+  </section> -->
+</section>
+
+<footer style=color:darkgoldenrod class="footer" *ngIf="openTodos.length >= 0 || completedTodos.length > 0">
+  <!--<span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>-->
+  <span style="margin-right:10px;" *ngIf="todos.length >= 0" class="todo-count" [class.is-selected]="selection == 'ALL'" (click)="changeSelection('ALL')"> Total: <strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}}</span>
+  <span style="margin-right:10px;" *ngIf="openTodos.length >= 0" class="todo-count" [class.is-selected]="selection == 'OPEN'"
+    (click)="changeSelection('OPEN')"><strong> Open: {{openTodos.length}}</strong> {{openTodos.length == 1 ? 'item' : 'items'}} </span>
+  <span style="margin-right:10px;" *ngIf="completedTodos.length >= 0" class="todo-count" [class.is-selected]="selection == 'COMPLETED'"
+    (click)="changeSelection('COMPLETED')"><strong> Completed: {{completedTodos.length}}</strong> {{completedTodos.length == 1 ? 'item' : 'items'}} </span>
+  <span style="margin-right:10px;" *ngIf="canceledTodos.length >= 0" class="todo-count" [class.is-selected]="selection == 'CANCELED'"
+    (click)="changeSelection('CANCELED')"><strong > Canceled: {{canceledTodos.length}}</strong> {{canceledTodos.length == 1 ? 'item' : 'items'}} </span>
+</footer>
+<table>
+  <td width="50%" valign="center">
+    <button (click)="toggleShow()" class="btn btn-warning">Your Notes</button>
+    <div class="toggle-panel" *ngIf="show" [hidden]="hidden" [style.visibility]="visibility">
+      <ul>
+        <li>
+          <td width="50%" valign="center">
+            <!--<div class="box" @showmsg="state">-->
+            <textarea class="rajabox" title="Şu an Sitede" style="vertical-align: middle;" alt>AHMET EMRE ERGUN</textarea>
+          </td>
+        </li>
+      </ul>
+    </div>
+  </td>
+</table>
+
+<!--<button (click)="toggleShow()">Show</button>
+<button (click)="toggleHidden()">Hidden</button>
+<button (click)="toggleVisible()">Visible</button>-->
+<!--<button (click)="togglestates()">Clickme</button>
+<div class="rajabox" [@showmsg]="state">asdasddsa</div>-->
+
+
+
+<!--<audio id="player">
+<source id="source" src="http://remote.address.com/example.mp3"></source>
+</audio>-->
+<!--<button *ngFor="let link of links" [routerLink]="link.value">
+    {{link.Name}}
+</paper-button>-->
