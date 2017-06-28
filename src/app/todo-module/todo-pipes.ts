@@ -10,7 +10,7 @@ import * as moment from 'moment'
 
 export class ToReadableDate implements PipeTransform {
   transform(value: Date): string {
-    console.log(value);
+    //console.log(value);
     return moment(value).format('Do MMM YY');
   }
 }
@@ -20,7 +20,7 @@ export class ToReadableDate implements PipeTransform {
 
 export class ToReadableToday implements PipeTransform {
   transform(value: Date): string {
-    console.log(value);
+   // console.log(value);
     return moment(value).format('Do MMM YY');
   }
 }
@@ -30,7 +30,7 @@ export class ToReadableToday implements PipeTransform {
 
 export class ToReadableTime implements PipeTransform {
   transform(value: HTMLTimeElement): string {
-    console.log(value);
+   // console.log(value);
     return moment(value).format('HH:mm');
   }
 }//
@@ -41,7 +41,7 @@ export class ToReadableTime implements PipeTransform {
 
 export class CompletedTodoPipe implements PipeTransform {
   transform(value: Todo[]): any {
-    console.log(value);
+    //console.log(value);
     return value.filter(t => t.complete === true);
   }
 }
@@ -53,7 +53,7 @@ export class CompletedTodoPipe implements PipeTransform {
 
 export class CanceledTodoPipe implements PipeTransform {
   transform(value: Todo[]): any {
-    console.log(value);
+    //console.log(value);
     return value.filter(t => t.cancel === true);
   }
 }
@@ -64,7 +64,7 @@ export class CanceledTodoPipe implements PipeTransform {
 
 export class OpenTodoPipe implements PipeTransform {
   transform(value: Todo[]): any {
-    console.log(value);
+    //console.log(value);
     return value.filter(t => t.complete === false);
   }
 }
@@ -77,7 +77,7 @@ export class OpenTodoPipe implements PipeTransform {
 
 export class CompletedTodoLengthPipe implements PipeTransform {
   transform(value: Todo[]): any {
-    console.log(value);
+   // console.log(value);
     return value.filter(t => t.complete === true).length;
   }
 }
@@ -87,7 +87,7 @@ export class CompletedTodoLengthPipe implements PipeTransform {
 
 export class CanceledTodoLengthPipe implements PipeTransform {
   transform(value: Todo[]): any {
-    console.log(value);
+   // console.log(value);
     return value.filter(t => t.cancel === true).length;
   }
 }
@@ -98,7 +98,7 @@ export class CanceledTodoLengthPipe implements PipeTransform {
 
 export class OpenTodoLengthPipe implements PipeTransform {
   transform(value: Todo[]): any {
-    console.log(value);
+   // console.log(value);
     return value.filter(t => t.complete === false).length;
   }
 }

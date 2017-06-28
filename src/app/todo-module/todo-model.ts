@@ -2,6 +2,7 @@ export class Todo {
 
   id: number;
   title: string = '';
+
   complete: boolean = false;
   cancel: boolean = false;
   dueDate: Date;
@@ -10,5 +11,7 @@ export class Todo {
   
   constructor(values: Object = {}) {
     Object.assign(this, values);
+    this.title = values['description'];
   }
+  
 }
