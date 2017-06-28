@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './todo-model';
+import { Observable } from "rxjs/Observable";
+import { Http } from "@angular/http/http";
+
 @Injectable()
 export class TodoService {
 
@@ -9,7 +12,7 @@ export class TodoService {
 
   // Placeholder for todo's
   todos: Todo[] = [];
-  constructor() {
+  constructor(private http: Http) {
   }
 
 /*getContacts(){
@@ -74,6 +77,13 @@ insertContact(contact: Contact){
       .filter(todo => todo.id === id)
       .pop();
   }
+
+
+
+  getAllTodosFromServer(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/todos/all');
+  }
+  
   // // Simulate POST /todos
   // addTodo(todo: Todo): TodoService {
   //   if (!todo.id) {
