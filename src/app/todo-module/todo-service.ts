@@ -79,11 +79,12 @@ insertContact(contact: Contact){
   }
 
 
-
+//burda kaldık
   getAllTodosFromServer(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/todos/all');
+    return this.http.get('http://localhost:3000/api/todos/all')
+   // .map(x => return x.json().payload)
   }
-  
+  ////
   // // Simulate POST /todos
   // addTodo(todo: Todo): TodoService {
   //   if (!todo.id) {
